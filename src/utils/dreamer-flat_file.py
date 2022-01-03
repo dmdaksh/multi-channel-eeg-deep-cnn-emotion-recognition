@@ -18,12 +18,12 @@ num_videos = dreamer_dict["noOfVideoSequences"][0, 0]  # number of film clips
 
 eeg_data = dreamer_dict["Data"]  # data containing eeg and scores
 
-os.makedirs("dreamer", exist_ok=True)  # creating a new dir in existing dir
+os.makedirs("Dreamer", exist_ok=True)  # creating a new dir in existing dir
 for subject in range(num_subjects):
     print(f"saving subject{subject+1}")
-    os.makedirs(f"dreamer/subject{subject+1}/eeg_samples",
+    os.makedirs(f"Dreamer/person{subject+1}/eeg_samples",
                 exist_ok=True)  # dir to store eeg signal for each subject
-    os.makedirs(f"dreamer/subject{subject+1}/eeg_labels",
+    os.makedirs(f"Dreamer/person{subject+1}/eeg_labels",
                 exist_ok=True)  # dir to store scores for each subject
     eeg_signal = eeg_data[0, subject]["EEG"][0, 0][0, 0][
         "stimuli"]  # eeg data of a subject
@@ -34,25 +34,25 @@ for subject in range(num_subjects):
         eeg = eeg_signal[video,
                          0]  # eeg signal of a subject for specific film clip
         np.savetxt(
-            f"dreamer/subject{subject+1}/eeg_samples/eeg{video+1}.csv",
+            f"Dreamer/person{subject+1}/eeg_samples/eeg{video+1}.csv",
             eeg,
             delimiter=",",
         )  # saving eeg signal into a csv file
 
     np.savetxt(
-        f"dreamer/subject{subject+1}/eeg_labels/valence.csv",
+        f"Dreamer/person{subject+1}/eeg_labels/valence.csv",
         valence,
         delimiter=",",
         fmt="%d",
     )  # saving valence score into a csv file
     np.savetxt(
-        f"dreamer/subject{subject+1}/eeg_labels/arousal.csv",
+        f"Dreamer/person{subject+1}/eeg_labels/arousal.csv",
         arousal,
         delimiter=",",
         fmt="%d",
     )  # saving arousal score into a csv file
     np.savetxt(
-        f"dreamer/subject{subject+1}/eeg_labels/dominance.csv",
+        f"Dreamer/person{subject+1}/eeg_labels/dominance.csv",
         dominance,
         delimiter=",",
         fmt="%d",
